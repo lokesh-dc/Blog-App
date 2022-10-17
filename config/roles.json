@@ -1,0 +1,16 @@
+{
+    "roles" : [
+        {
+            "role" : "Admin",
+            "access": "CRUD"
+        },
+        {
+            "role" : "Writer",
+            "access" : "CRUD"
+        },
+        {
+            "role" : "Reader",
+            "access" : "RU"
+        }
+    ]
+}
