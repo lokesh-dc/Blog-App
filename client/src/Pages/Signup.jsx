@@ -1,33 +1,52 @@
-import {  Box, Button,  FormLabel, Grid,  Input, InputGroup, InputRightElement, Text,  Icon, Flex } from "@chakra-ui/react";
+import {  Box, Button,  FormLabel, Grid,  Input, InputGroup, InputRightElement, Text,  Icon} from "@chakra-ui/react";
+import { Link } from "react-router-dom"
 import { BsEyeSlashFill, BsEyeFill } from "react-icons/bs"
 import { useState} from "react";
+import { useDispatch} from "react-redux";
+
 import SocialButtons from "../Components/SocialButtons";
+import useForm from "../Hooks/useform";
+import { signup } from "../../Store/auth/auth.action";
 
 export default function Signup() {
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
+    const [formError, setFormError] = useState("")
+
+    const {creds, execute} = useForm()
+    const dispath = useDispatch()
+    function handleChange(e) {
+        const {name, value} = e.target;
+        execute(name, value);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        if(creds.email==="" && creds.password===""){
+            setFormError("Please enter your Email id & Password")
+        }
+        else if(creds.email===""){
+            setFormError("Please enter your Email Id");
+        }
+        else if(creds.password===""){
+            setFormError("Please provide your Password");
+        }
+        else{
+            dispatch(signup(creds));
+        }
+    }
     return (
-        <Grid h="90vh">
-            <Grid templateColumns="1fr 1fr" w="1000px" m="auto" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px">
-                <Flex flexFlow="column" bgColor="grey" color="white" justifyContent="center">
-                    <Text fontSize='2xl'>Nice to See you again</Text>
-                    <Text fontSize='6xl'>Welcome Back</Text>
-                    <Text>Enter your credentials to enter into system</Text>
-                    <Text m="20px">or</Text>
-                    <Box >
-                        <Button colorScheme="transparent" border="1px solid white" px="20px" size="lg" _hover={{backgroundColor:"black", border:"1px solid black"}}>Create an Account</Button>
-                    </Box>
-                </Flex>
-                <Grid gap="30px" p="30px"> 
+        <Grid h="93vh" bgImage={require("../Resources/background.jpg")} bgSize="100%" >
+                <Grid gap="30px" p="30px" width="600px" margin="auto" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" bgColor="white"> 
                     <Text fontSize='3xl'>Sign Up</Text>
                     <Box>
                         <FormLabel>Enter Email</FormLabel>
-                        <Input />
+                        <Input name="email" onChange={handleChange}/>
                     </Box>
                     <Box>
                         <FormLabel>Enter Password</FormLabel>
                         <InputGroup>
-                            <Input type={ show ? "text" : "password"} />
+                            <Input type={ show ? "text" : "password"} name="password" onChange={handleChange}/>
                             <InputRightElement width='4.5rem'>
                                 <Icon as={show ? BsEyeSlashFill : BsEyeFill}  onClick={handleClick} />
                             </InputRightElement>
@@ -36,7 +55,8 @@ export default function Signup() {
                     <Button id="signin">Sign Up</Button>
                     <Text>or</Text>
                     <SocialButtons />
-                </Grid>
+
+                    <Text>Already have an account ?<Link to="/login"> Sign In </Link></Text>
             </Grid>
         </Grid>
     )
