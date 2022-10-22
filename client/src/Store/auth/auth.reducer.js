@@ -5,16 +5,21 @@ import {
     AUTH_LOGOUT,
     AUTH_SIGNUP_ERROR,
     AUTH_SIGNUP_LOADING,
-    AUTH_SIGNUP_SUCCESS
+    AUTH_SIGNUP_SUCCESS,
+    AUTH_VERIFY_ERROR,
+    AUTH_VERIFY_LOADING,
+    AUTH_VERIFY_SUCCESS
 } from "./auth.type"    
 
 
 const initState = {
     loading : false,
     error : "",
-    token : "",
-    refreshToken : ""
-
+    data : {
+        message : "",
+        token : "",
+        refreshToken : ""
+    } 
 }
 
 export const authReducer =  (state = initState, {type, payload}) => {
@@ -36,8 +41,9 @@ export const authReducer =  (state = initState, {type, payload}) => {
                 ...state,
                 loading : false,
                 error : "",
-                token : payload.token,
-                refreshToken : payload.refresh
+                data : {
+                    message : payload.message,
+                }
             }
         case AUTH_LOGIN_LOADING : 
             return {
@@ -56,16 +62,46 @@ export const authReducer =  (state = initState, {type, payload}) => {
                 ...state,
                 loading : false,
                 error : "",
-                token : payload.token,
-                refreshToken : payload.refresh
+                data : {
+                    token : payload.token,
+                    refreshToken : payload.refresh
+                }
             }
+        case AUTH_VERIFY_LOADING : 
+            return {
+                ...state,
+                loading : true,
+                error : "",
+            }
+        case AUTH_VERIFY_ERROR :{
+            return {
+                ...state,
+                loading : false,
+                error : payload
+            }
+        }
+
+        case AUTH_VERIFY_SUCCESS :
+            return {
+                ...state,
+                loading: false,
+                error: "",
+                data : {
+                    token : payload.token,
+                    refreshToken : payload.refresh
+                }
+            }
+
         case AUTH_LOGOUT :
             return {
                 ...state,
                 loading : false,
                 error: "",
-                token : "",
-                refreshToken : ""
+                data : {
+                    message : "",
+                    token : "",
+                    refreshToken : ""
+                }
             }
         default : 
             return state;

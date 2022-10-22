@@ -12,8 +12,8 @@ const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: 'yasmeen.connelly@ethereal.email',
-        pass: 'pQCa4ytvjFt6CP66d1'
+        user: 'adolph.quigley99@ethereal.email',
+        pass: 'R4nK7brvySjzeRemdK'
     }
 })
 let otps = {};
@@ -24,7 +24,7 @@ app.post("/signup", async (req, res)=>{
         if(user){
             return res.status(401).send("Email already exists!");
         }
-        await userModel.create({email,password, userName});
+        await userModel.create({email,password, userName, verified : false});
         let otp = Math.floor(Math.random() * 100000);
         otps[email] = otp;
         console.log(otps);
@@ -34,7 +34,7 @@ app.post("/signup", async (req, res)=>{
             subject : "Account VErification",
             text: `Account successfully created Here is the OTP : ${otp} to verify your mail ID`
         })
-        res.send({message : "Verify your email Id"});
+        res.send({message : `Verify your email Id : ${email}`});
     }catch(e) {
         res.status(500).send(e.message);
     }
@@ -42,9 +42,15 @@ app.post("/signup", async (req, res)=>{
 
 app.post("/signup/verify", async (req, res)=>{
     let {email,otp} = req.body;
+    console.log(email,otp)
     if(otp){
-        if(otps[email]===otp){
-            res.send("Account is verified");
+        if(otps[email]==otp){
+            let user = await userModel.findOne({email: email});
+            console.log(user)
+            let id = user.id;
+            let token = jwt.sign({id, email},process.env.SECRET_PASS, {expiresIn: "1 hour"})
+            let refreshToken = jwt.sign({id, email},process.env.REFRESH_PASS,{expiresIn: "7 days"})
+            res.send({token, refreshToken});
         }else{
             res.status(401).send("OTP is invalid")
         }
@@ -58,9 +64,10 @@ app.post("/login", async(req, res)=>{
     try{
         let user = await userModel.findOne({email, password});
         if(user){
-            let token = jwt.sign({email},process.env.SECRET_PASS, {expiresIn: "1 hour"})
-            let refreshToken = jwt.sign({email},process.env.REFRESH_PASS,{expiresIn: "7 days"})
-            res.send({message:"User created Successfully", token, refreshToken});
+            let id = user._id;
+            let token = jwt.sign({id, email},process.env.SECRET_PASS, {expiresIn: "1 hour"})
+            let refreshToken = jwt.sign({id, email},process.env.REFRESH_PASS,{expiresIn: "7 days"})
+            res.send({token, refreshToken});
         }
         else{
             return res.status(401).send("Invalid credentials");
