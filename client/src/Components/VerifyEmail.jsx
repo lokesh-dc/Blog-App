@@ -1,15 +1,19 @@
 import { Box, Button, Flex, FormLabel, Grid, HStack,  PinInput, PinInputField, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom"
+
 import { verifyUser } from "../Store/auth/auth.action"
 
 export default function VerifyEmail() {
 
     const { loading, error, data } = useSelector((store)=> store.auth);
-    const email = data.message.split(":")[1];
+    const email = data.message?.split(":")[1];
     const [otp, setOtp] = useState(0);
+    
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
 
     function handleChange(e){
         let value = otp;
@@ -18,7 +22,6 @@ export default function VerifyEmail() {
         setOtp(value);
     }
 
-    console.log(otp)
     function handleSubmit(e) {
         e.preventDefault();
         if(otp!==0){
@@ -27,6 +30,13 @@ export default function VerifyEmail() {
         }
     }
 
+    useEffect(()=>{
+        if(data.token){
+            navigate("/login");
+        }
+    },[data.token])
+
+    console.log(data);
 
     return (
         <Grid h="93vh" bgImage={require("../Resources/background.jpg")} bgSize="100%" >

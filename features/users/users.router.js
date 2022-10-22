@@ -2,6 +2,7 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 
 const userModel = require("./user.schema");
+const otpModel = require("../otps/otps.schema");
 const jwt = require("jsonwebtoken");
 require("dotenv").config({path: __dirname+"/config.env"})
 
@@ -16,7 +17,6 @@ const transporter = nodemailer.createTransport({
         pass: 'R4nK7brvySjzeRemdK'
     }
 })
-let otps = {};
 app.post("/signup", async (req, res)=>{
     let {userName, email, password} = req.body;
     try{
@@ -26,15 +26,14 @@ app.post("/signup", async (req, res)=>{
         }
         await userModel.create({email,password, userName, verified : false});
         let otp = Math.floor(Math.random() * 100000);
-        otps[email] = otp;
-        console.log(otps);
+        await otpModel.create({email: email, otp: otp });
         transporter.sendMail({
             to: email,
             from : "blog@gmail.com",
             subject : "Account VErification",
             text: `Account successfully created Here is the OTP : ${otp} to verify your mail ID`
         })
-        res.send({message : `Verify your email Id : ${email}`});
+        res.send({message : `Verify your email Id:${email}`});
     }catch(e) {
         res.status(500).send(e.message);
     }
@@ -42,15 +41,15 @@ app.post("/signup", async (req, res)=>{
 
 app.post("/signup/verify", async (req, res)=>{
     let {email,otp} = req.body;
-    console.log(email,otp)
+    console.log(email,otp);
     if(otp){
-        if(otps[email]==otp){
+        let cred = await otpModel.findOne({email, otp});
+        if(cred){
             let user = await userModel.findOne({email: email});
-            console.log(user)
             let id = user.id;
             let token = jwt.sign({id, email},process.env.SECRET_PASS, {expiresIn: "1 hour"})
             let refreshToken = jwt.sign({id, email},process.env.REFRESH_PASS,{expiresIn: "7 days"})
-            res.send({token, refreshToken});
+            res.send({message : "Successfully Verified.", token, refreshToken});
         }else{
             res.status(401).send("OTP is invalid")
         }

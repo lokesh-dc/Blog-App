@@ -87,8 +87,9 @@ export const authReducer =  (state = initState, {type, payload}) => {
                 loading: false,
                 error: "",
                 data : {
+                    message : payload.message,
                     token : payload.token,
-                    refreshToken : payload.refresh
+                    refreshToken : payload.refreshToken
                 }
             }
 
