@@ -26,7 +26,7 @@ app.post("/signup", async (req, res)=>{
         }
         await userModel.create({email,password, userName, verified : false});
         let otp = Math.floor(Math.random() * 100000);
-        await otpModel.create({email: email, otp: otp });
+        await otpModel.create({email: email, otp: otp, verified : false});
         transporter.sendMail({
             to: email,
             from : "blog@gmail.com",
@@ -41,10 +41,10 @@ app.post("/signup", async (req, res)=>{
 
 app.post("/signup/verify", async (req, res)=>{
     let {email,otp} = req.body;
-    console.log(email,otp);
     if(otp){
-        let cred = await otpModel.findOne({email, otp});
+        let cred = await otpModel.findOne({email, otp, verified : false});
         if(cred){
+            await otpModel.findOneAndUpdate({email, otp, verified : false}, {verified : true});
             let user = await userModel.findOne({email: email});
             let id = user.id;
             let token = jwt.sign({id, email},process.env.SECRET_PASS, {expiresIn: "1 hour"})

@@ -18,7 +18,6 @@ export const Login = ({email, password}) => async (dispatch) =>{
     dispatch({type:AUTH_LOGIN_LOADING});
     try{
         let response = await axios.post(`${baseLink}/users/login`,{email, password})
-        console.log(response.data)
         dispatch({type: AUTH_LOGIN_SUCCESS, payload: response.data});
         return response.data;
     }catch(e){
