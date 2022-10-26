@@ -11,7 +11,7 @@ export default function BlogDiv({blogDetails}) {
                 <Text>Like: {blogDetails.likes}</Text>
                 <Text>Share</Text>
             </Grid>
-            <CommentSection comments={blogDetails?.comments} />
+            <CommentSection blogid={blogDetails._id} comments={blogDetails?.comments} />
         </Box>
     )
 }

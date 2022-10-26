@@ -11,6 +11,7 @@ require("dotenv").config({path: __dirname+"/config.env"})
 
 const usersRouter = require("./features/users/users.router");
 const blogsRouter = require("./features/blogs/blogs.router");
+const blogsModel = require("./features/blogs/blog.schema");
 
 
 const app = express()
@@ -26,9 +27,13 @@ const io = socketIo(server, {
 io.on("connection", (socket) => {
     console.log("new user", socket.id);
 
+    socket.on("comment", async ({id,message})=>{
+        let blog = await blogsModel.findById({_id:id});
+        let blogComments = blog.comments;
+        blogComments.push(message);
+        await blogsModel.findByIdAndUpdate({_id: id}, {comments : blogComments })
 
-    socket.on("comment", (data)=>{
-        console.log(data)
+        socket.emit("blogComments", {id, blogComments} );
     })
 })
 
