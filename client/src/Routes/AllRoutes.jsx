@@ -2,7 +2,7 @@ import React from "react";
 
 import {Routes, Route} from "react-router-dom";
 import VerifyEmail from "../Components/VerifyEmail";
-import BlogsPage from "../Pages/Blogs";
+import BlogsPage from "../Pages/BlogsPage";
 import Homepage from "../Pages/Homepage";
 import Login from "../Pages/Login";
 import Signup from "../Pages/Signup";

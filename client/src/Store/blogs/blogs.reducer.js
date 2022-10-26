@@ -5,7 +5,8 @@ import {
     BLOG_FETCH_ERROR,
     BLOG_FETCH_LOADING,
     BLOG_FETCH_SUCCESS,
-    BLOG_UPDATE
+    BLOG_UPDATE,
+    BLOG_LIKE
 } from "./blogs.type"
 
 
@@ -43,25 +44,31 @@ export const blogsReducer = (state = initState, {type, payload}) =>{
             return {
                 ...state,
                 loading : false,
-                error : false
+                error : ""
             }
         case BLOG_UPDATE : 
             return {
                 ...state,
                 loading : false,
-                error : false
+                error : ""
             }
         case BLOG_DELETE : 
             return {
                 ...state,
                 loading : false,
-                error : false
+                error : ""
             }
         case BLOG_COMMENT : 
             return {
                 ...state,
                 loading : false,
-                error : false
+                error : ""
+            }
+        case BLOG_LIKE : 
+            return {
+                ...state,
+                loading : false,
+                error : ""
             }
         default :
             return state;

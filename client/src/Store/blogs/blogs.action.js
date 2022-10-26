@@ -7,7 +7,8 @@ import {
     BLOG_FETCH_ERROR,
     BLOG_FETCH_LOADING,
     BLOG_FETCH_SUCCESS,
-    BLOG_UPDATE
+    BLOG_UPDATE,
+    BLOG_LIKE
 } from "./blogs.type"
 
 export const BlogsFetch = () => async (dispatch) => {
@@ -19,4 +20,9 @@ export const BlogsFetch = () => async (dispatch) => {
     }catch(e){
         dispatch({ type : BLOG_FETCH_ERROR , payload : e.response.data});
     }
+}
+
+export const BlogLike = (id) => async (dispatch) => {
+    let response = await axios.post(`${baseLink}/blogs/like/${id}`)
+    dispatch({type : BLOG_LIKE});
 }
