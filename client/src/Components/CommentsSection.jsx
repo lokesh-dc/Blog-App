@@ -26,24 +26,25 @@ export default function CommentSection({blogid,comments}) {
         const id = blogid;
         socket.emit('comment', {id,message});
 
+
         
-        // socket.on("blogComments", ({id, blogComments})=>{
-        //     if(id===blogid){
-        //         setState(blogComments);
-        //     }
-        // })
     }
 
     useEffect(()=>{
        socket.on('connect', ()=> setRes(true))
-    },[])
 
-
-    socket.on("blogComments", ({id, blogComments})=>{
+       socket.on("blogComments", ({id, blogComments})=>{
+        console.log("got new comment")
+        alert("new comment")
         if(id===blogid){
             setState(blogComments);
         }
     })
+
+    },[])
+
+
+ 
 
     return(
         <>

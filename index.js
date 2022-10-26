@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
         blogComments.push(message);
         await blogsModel.findByIdAndUpdate({_id: id}, {comments : blogComments })
 
-        socket.emit("blogComments", {id, blogComments} );
+        io.emit("blogComments", {id, blogComments} );
     })
 })
 
