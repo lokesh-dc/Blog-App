@@ -47,6 +47,7 @@ export default function Signup() {
             dispatch(signup(creds))
         }                                       
     }
+    
     useEffect(()=>{
         if(data.message){
             navigate("/verify")

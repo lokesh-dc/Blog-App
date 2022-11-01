@@ -13,9 +13,9 @@ export default function SocialButtons() {
             <Button  leftIcon={<FaGoogle />}>
                 Google
             </Button>
-            <Button leftIcon={<FaGithub />}>
-                GitHub
-            </Button>
+            <a href="https://github.com/login/oauth/authorize?client_id=2bc9e0737c50f22d2780" >
+                <Button leftIcon={<FaGithub />}> GitHub </Button>
+            </a>
                     
         </Flex>
     )

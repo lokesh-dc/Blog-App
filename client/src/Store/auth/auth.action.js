@@ -14,7 +14,7 @@ import {
 } from "./auth.type"    
 
 
-export const Login = ({email, password}) => async (dispatch) =>{
+export const login = ({email, password}) => async (dispatch) =>{
     dispatch({type:AUTH_LOGIN_LOADING});
     try{
         let response = await axios.post(`${baseLink}/users/login`,{email, password})
@@ -28,7 +28,7 @@ export const Login = ({email, password}) => async (dispatch) =>{
 export const signup = ({email, password}) => async (dispatch) => {
     dispatch({type:AUTH_SIGNUP_LOADING});
     try{
-        let response = await axios.post(`${baseLink}/users/signup`, {email,password});
+        let response = await axios.post(`${baseLink}/users/signup`, {email,password, verified: false});
         dispatch({type:AUTH_SIGNUP_SUCCESS, payload : response.data});
         return response.data;
     } catch (e) {
@@ -38,7 +38,6 @@ export const signup = ({email, password}) => async (dispatch) => {
 
 
 export const verifyUser = ({email, otp}) => async (dispatch) => {
-    console.log(email, otp)
     dispatch({ type: AUTH_VERIFY_LOADING });
     try{
         let response = await axios.post(`${baseLink}/users/signup/verify`, {email,otp});

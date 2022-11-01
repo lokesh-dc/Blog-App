@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FormLabel, Grid, HStack,  PinInput, PinInputField, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, FormLabel, Grid, HStack,  Input,  PinInput, PinInputField, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,12 +9,13 @@ import { verifyUser } from "../Store/auth/auth.action"
 export default function VerifyEmail() {
 
     const { loading, error, data } = useSelector((store)=> store.auth);
-    const email = data.message?.split(":")[1];
+    const [email,setEmail] = useState("");
     const [otp, setOtp] = useState(0);
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    
     function handleChange(e){
         let value = otp;
         let inp = +e.target.value;
@@ -30,11 +31,15 @@ export default function VerifyEmail() {
         }
     }
 
+    function handleInput(e){
+        setEmail(e.target.value);
+    }
+
     useEffect(()=>{
         if(data.token){
             navigate("/login");
         }
-    },[data.token])
+    },[data.token, navigate])
 
     console.log(data);
 
@@ -43,6 +48,10 @@ export default function VerifyEmail() {
             <Grid gap="30x" p="30px" width="600px" margin="auto" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" bgColor="white" justifyContent="center">
                 <Text fontSize="3xl" >Verify your Email ID </Text>
                 <Flex flexDir="column" gap="20px" mt={20}>
+                    <Box>
+                        <FormLabel>Enter your Email Id:</FormLabel>
+                        <Input onChange={handleInput}/>
+                    </Box>
                     <Box>
                     <FormLabel>Enter your OTP:</FormLabel>
                     <HStack justifyContent="center" mb={10}>
@@ -54,7 +63,7 @@ export default function VerifyEmail() {
                             <PinInputField onChange={handleChange}/>
                         </PinInput>
                     </HStack>
-                   <Text fontSize="sm" color="grey">Email has been successfully sent to: {email}</Text>
+                   <Text fontSize="sm" color="grey">Email has been successfully sent.</Text>
                     </Box>
                     {
                         error &&

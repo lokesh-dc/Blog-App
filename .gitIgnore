@@ -2,5 +2,6 @@
 /package-lock.json
 /production.env
 /development.env
+/config.env
 
 /.gitIgnore
