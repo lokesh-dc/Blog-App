@@ -30,3 +30,19 @@
   color: white;
 
 }
+
+.primary-button{
+  background-color: black;
+  color: white;
+  border-radius: 0px;
+}
+
+.blog-img{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;  
+}
+
+/* #blogs-div>:nth-child(2n+1){
+  color: red;
+} */
