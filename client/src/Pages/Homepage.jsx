@@ -20,37 +20,7 @@ export default function Homepage() {
 
 
     return (
-        <Grid templateColumns="1fr 1fr 1fr" gap="10"  w="75%" m="auto" id="blogs-div">
-            {
-                data?.map((b,index)=> (
-                    <BlogDiv key={index} blogDetails={b} />
-                ))
-            }
-            {
-                data?.map((b,index)=> (
-                    <BlogDiv key={index} blogDetails={b} />
-                ))
-            }
-            {
-                data?.map((b,index)=> (
-                    <BlogDiv key={index} blogDetails={b} />
-                ))
-            }
-            {
-                data?.map((b,index)=> (
-                    <BlogDiv key={index} blogDetails={b} />
-                ))
-            }
-            {
-                data?.map((b,index)=> (
-                    <BlogDiv key={index} blogDetails={b} />
-                ))
-            }
-            {
-                data?.map((b,index)=> (
-                    <BlogDiv key={index} blogDetails={b} />
-                ))
-            }
+        <Grid templateColumns="1fr 1fr" gap="10"  w="80%" m="auto" id="blogs-div">
             {
                 data?.map((b,index)=> (
                     <BlogDiv key={index} blogDetails={b} />

@@ -43,6 +43,21 @@
   object-fit: cover;  
 }
 
+.like{
+  background-color: rgba(128, 128, 128, 0.158);
+  padding: 10px 20px
+}
+
+.like div{
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+}
+.like img{
+  width: 20px;
+  height: 20px;
+}
+
 /* #blogs-div>:nth-child(2n+1){
   color: red;
 } */

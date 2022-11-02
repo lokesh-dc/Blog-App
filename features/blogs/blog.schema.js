@@ -5,7 +5,10 @@ const blogsSchema = new mongoose.Schema({
     short_desc: String,
     description : String,
     likes : {type : Number, default : 0},
-    comments : Array
+    comments : Array,
+    src : String,
+    createdOn : String,
+    writer : {type: mongoose.Schema.Types.ObjectId, ref:"writer"}
 })
 
 
