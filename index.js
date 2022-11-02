@@ -35,6 +35,15 @@ io.on("connection", (socket) => {
 
         io.emit("blogComments", {id, blogComments} );
     })
+
+    socket.on("liked", async({id})=>{
+        let blog = await blogsModel.findById({_id:id});
+        let likes = blog.likes;
+        likes += 1;
+        await blogsModel.findByIdAndUpdate({_id: id}, {likes: likes })
+
+        io.emit("liked", {id, likes});
+    })
 })
 
 

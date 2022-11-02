@@ -5,7 +5,7 @@ import io from "socket.io-client";
 // import CommentInput from "./CommentInput";
 import CommentsDiv from "./CommentsDiv";
 
-const socket = io.connect('http://localhost:8080');
+export const socket = io.connect('http://localhost:8080');
 
 
 export default function CommentSection({blogid,comments}) {
@@ -25,17 +25,12 @@ export default function CommentSection({blogid,comments}) {
         e.preventDefault();
         const id = blogid;
         socket.emit('comment', {id,message});
-
-
-        
     }
 
     useEffect(()=>{
        socket.on('connect', ()=> setRes(true))
 
        socket.on("blogComments", ({id, blogComments})=>{
-        console.log("got new comment")
-        alert("new comment")
         if(id===blogid){
             setState(blogComments);
         }

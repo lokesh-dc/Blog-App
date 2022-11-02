@@ -1,25 +1,38 @@
 import { Flex, Grid, Img, Text } from "@chakra-ui/react";
 import { useState , useEffect} from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { BlogLike, getBlog } from "../Store/blogs/blogs.action";
-
+import {  getBlog } from "../Store/blogs/blogs.action";
+import CommentSection, { socket } from "../Components/CommentsSection"
 export default function Blog() {
 
     const params = useParams();
     const id = params.id;
     const [blog, setBlog] = useState({});
 
-    const dispatch = useDispatch();
+    const [blogLikes, setBlogLikes] = useState(0);
+
+    const [ isLiked, setLiked ] = useState(false);
 
     useEffect(()=>{
         getBlog(id).then((res)=>{
             setBlog(res);
+            setBlogLikes(res.likes);
         })
     },[id])
 
+    useEffect(()=>{
+        socket.on('connect', ()=> console.log("connected"))
+
+        socket.on("liked",({id, likes})=>{
+            if(id===blog._id){
+                setBlogLikes(likes);
+                setLiked(true)
+            }
+        })
+    },[blog._id])
+
     function handleClick(){
-        dispatch(BlogLike(blog._id));
+        socket.emit("liked", {id});
     }
     return (
         <Grid w="50%" m="auto" mt={50} border="1px solid" textAlign="left" p={30}>
@@ -37,8 +50,8 @@ export default function Blog() {
             </div>
             <Grid templateColumns="repeat(3,1fr)"  gap={10} className="like" >
                     <Flex onClick={handleClick}>
-                        <Img src={require("../Resources/icons/like.png")} />
-                        {blog?.likes}
+                        <Img src={isLiked ? require("../Resources/icons/like.png") : require("../Resources/icons/not_liked.png")} />
+                        {blogLikes}
                     </Flex>
                     <Flex>
                         <Img src={require("../Resources/icons/comments.png")} />
@@ -49,7 +62,7 @@ export default function Blog() {
                         <Text>Share</Text>
                     </Flex>
             </Grid>
-            {/* <CommentSection blogid={blogDetails._id} comments={blogDetails?.comments} /> */}
+            {/* <CommentSection blogid={blog?._id} comments={blog?.comments} /> */}
         </Grid>
     )
 }
