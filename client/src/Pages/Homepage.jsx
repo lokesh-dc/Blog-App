@@ -19,6 +19,8 @@ export default function Homepage() {
     },[])
 
 
+    console.log(data)
+
     return (
         <Grid templateColumns="1fr 1fr" gap="10"  w="80%" m="auto" id="blogs-div">
             {

@@ -52,12 +52,22 @@
   align-items: center;
   gap: 5px;
   justify-content: center;
+  padding: 5px 10px ;
+  cursor: pointer;
 }
 .like img{
   width: 20px;
   height: 20px;
 }
 
+.writer {
+  align-items: center;
+  gap: 10px;
+}
+.writer img{
+  width: 30px;
+  height: 30px;
+}
 /* #blogs-div>:nth-child(2n+1){
   color: red;
 } */

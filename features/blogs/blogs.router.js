@@ -33,7 +33,7 @@ app.post("/", async (req, res) => {
             let r = k.role;
             let a = k.access;
             if(role ==  r && a.includes(oper)){
-                let blog = await blogsModel.create({title, description, short_desc, src, createdOn, writer: user.id });
+                let blog = await blogsModel.create({title, description, short_desc, src, createdOn, user: user.id });
                 return res.send(blog);
             }
         }
@@ -51,13 +51,13 @@ app.post("/like/:id", async(req,res)=>{
 
 app.get("/:id", async(req,res)=>{
     let id = req.params.id ;
-    let blog = await blogsModel.findById({_id : id});
+    let blog = await blogsModel.findById({_id : id}).populate("user", {"password" : 0});
     res.send(blog);
 })
 
 
 app.get("/", async (req, res) => {
-    let blogs = await blogsModel.find();
+    let blogs = await blogsModel.find().populate("user", {"password" : 0});
     res.send(blogs);
 })
 
