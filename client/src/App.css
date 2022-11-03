@@ -66,21 +66,23 @@
 
 .like{
   background-color: rgba(128, 128, 128, 0.158);
-  padding: 10px 20px
+  padding: 10px 50px
 }
 
 .like div{
   align-items: center;
+  justify-content: space-evenly;
   gap: 5px;
-  justify-content: center;
   padding: 5px 10px ;
   cursor: pointer;
-}
-.like img{
-  width: 20px;
-  height: 20px;
+  font-size: 1rem;
 }
 
+.like svg{
+  width: 25px;
+  height: 25px;
+  color: grey;
+}
 .writer {
   align-items: center;
   gap: 10px;

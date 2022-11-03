@@ -28,6 +28,10 @@ export default function Blog() {
         })
     },[id])
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [id])
+
     useEffect(()=>{
         socket.on('connect', ()=> console.log("connected"))
 
@@ -45,7 +49,7 @@ export default function Blog() {
         setShow(!show);
     }
     return (
-        <Grid className={style.blog}>
+        <Grid className={style.blog} templateColumns= "50px 5fr 1fr">
             <Sidebar />
             <Grid px="100px" pt="50px" height="auto">
                 <WriterDiv email={blog?.user?.email} createdOn={blog?.createdOn}/>
@@ -79,7 +83,7 @@ Elementum facilisis leo vel fringilla est ullamcorper. Donec pretium vulputate s
             {
                 blog.comments && show ? 
                 <CommentSection blogid={blog?._id} show={show} comments={blog?.comments} length={blog?.comments?.length} /> :
-                <SideBlog />
+                <SideBlog writer={blog?.user}/>
             }
         </Grid>
     )

@@ -1,20 +1,25 @@
-import { Flex, Img, Text } from "@chakra-ui/react";
+import { Flex, Grid, Text } from "@chakra-ui/react";
+
+import { IoShareOutline } from "react-icons/io5"
+import { BsBookmarkPlus , BsHeart , BsHeartFill , BsChatRight } from "react-icons/bs"
 
 export default function Interact({handleLike, isLiked,blogLikes, toggleComments,length}) {
     return (
-        <Flex  gap={10} className="like" my={30}>
-            <Flex onClick={handleLike}>
-                <Img src={isLiked ? require("../Resources/icons/like.png") : require("../Resources/icons/not_liked.png")} />
-                {blogLikes}
-            </Flex>
-            <Flex onClick={toggleComments}>
-                <Img src={require("../Resources/icons/comments.png")} />
-                <Text>{length}</Text>
-            </Flex>
+        <Grid templateColumns="100px 100px" gap={10} className="like" my={30} justifyContent="space-between">
             <Flex>
-                <Img src={require("../Resources/icons/share.png")} />
-                <Text>Share</Text>
+                <Flex onClick={handleLike} >
+                    {isLiked ?  <BsHeartFill color="red" /> : <BsHeart  />}
+                    <Text>{blogLikes}</Text>
+                </Flex>
+                <Flex onClick={toggleComments}>
+                    <BsChatRight />
+                    <Text>{length}</Text>
+                </Flex>
             </Flex>
-        </Flex>
+            <Flex >
+                <IoShareOutline />
+                <BsBookmarkPlus/>
+            </Flex>
+        </Grid>
     )
 }

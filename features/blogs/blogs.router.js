@@ -15,7 +15,7 @@ function getDate(){
     var dd = today.getDate();
     var mm = today.getMonth();
 
-    var created = `${dd} ${month[mm]}`
+    var created = `${month[mm]} ${dd}`
     return created;
 }
 
