@@ -1,4 +1,4 @@
-import { Button, Flex, Grid } from "@chakra-ui/react";
+import { Button, Grid } from "@chakra-ui/react";
 
 import { FiSend } from "react-icons/fi"
 

@@ -7,6 +7,7 @@ import { useDispatch, useSelector} from "react-redux";
 import SocialButtons from "../Components/SocialButtons";
 import useForm from "../Hooks/useform";
 import { signup } from "../Store/auth/auth.action";
+import Nav from "../Components/UserNav";
 
 export default function Signup() {
     // password show / hide
@@ -61,6 +62,8 @@ export default function Signup() {
     },[error])
 
     return (
+        <>
+        <Nav />
         <Grid h="93vh" bgImage={require("../Resources/background.jpg")} bgSize="100%" >
                 <Grid gap="30px" p="30px" width="600px" margin="auto" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" bgColor="white"> 
                     <Text fontSize='3xl'>Sign Up</Text>
@@ -88,5 +91,6 @@ export default function Signup() {
                     <Text>Already have an account ?<Link to="/login"> Sign In </Link></Text>
             </Grid>
         </Grid>
+        </>
     )
 }

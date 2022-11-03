@@ -7,6 +7,7 @@ import SocialButtons from "../Components/SocialButtons";
 import { useDispatch, useSelector} from "react-redux";
 import useForm from "../Hooks/useform";
 import { login } from "../Store/auth/auth.action";
+import Nav from "../Components/UserNav";
 
 
 export default function Login() {
@@ -71,6 +72,8 @@ export default function Login() {
     console.log(data)
 
     return (
+        <>
+        <Nav />
         <Grid h="93vh" bgImage={require("../Resources/background.jpg")} bgSize="100%">
                 <Grid gap="30px" p="30px" width="600px" margin="auto" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" bgColor="white"> 
                     <Text fontSize='3xl'>Sign In</Text>
@@ -98,5 +101,6 @@ export default function Login() {
                     <Text>Don't have an account? <Link to="/signup"> Sign Up </Link></Text>
             </Grid>
         </Grid>
+        </>
     )
 } 

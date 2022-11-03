@@ -7,6 +7,7 @@
 /* Heading Font */
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
 
 .App {
   text-align: center;
@@ -19,7 +20,11 @@
   font-weight: bold;
   font-size: 1.5rem;
 }
-
+.quote{
+  /* padding-top: 200px; */
+    font-family: 'Shadows Into Light', cursive;
+    letter-spacing: 2px;
+}
 .heading{
   /* font-family: 'Caveat', cursive; */
   font-size: 4rem;
@@ -40,7 +45,7 @@
   padding: 0 20px;
 }
 
-#Social-buttons > button:hover,
+#Social-buttons button:hover,
 #signin{
   background-color: black;
   color: white;
@@ -84,6 +89,3 @@
   width: 30px;
   height: 30px;
 }
-/* #blogs-div>:nth-child(2n+1){
-  color: red;
-} */

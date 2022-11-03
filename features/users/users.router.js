@@ -26,7 +26,7 @@ app.post("/signup", async (req, res)=>{
     try{
         let user = await userModel.findOne({email});
         if(user){
-            return res.status(401).send("Email already exists!");
+            return res.status(401).send("Email Id already exists!");
         }
         await userModel.create({email,password, userName, verified : false});
         let otp = Math.floor(Math.random() * 100000);
@@ -34,7 +34,7 @@ app.post("/signup", async (req, res)=>{
         transporter.sendMail({
             to: email,
             from : process.env.XM,
-            subject : "Account VErification",
+            subject : "Account Verification",
             text: `Account successfully created Here is the OTP : ${otp} to verify your mail ID`
         },(error, info)=>{
             if(error){
@@ -72,7 +72,14 @@ app.post("/login", async(req, res)=>{
     let {email, password} = req.body;
     try{
         let user = await userModel.findOne({email, password});
-        console.log(user)
+        if(!user){
+            let user = await userModel.findOne({email});
+            if(user){
+                return res.status(401).send("Invalid credentials");
+            }else{
+                return res.status(401).send("Email Id does't exist!");
+            }
+        }
         if(user.verified===false){
             let otp = Math.floor(Math.random() * 100000);
             await otpModel.create({email: email, otp: otp, verified : false});
@@ -84,19 +91,11 @@ app.post("/login", async(req, res)=>{
             })
             return res.send({message : "Verify your Email Id first"});
         }
-        if(user){
+        else{
             let id = user._id;
             let token = jwt.sign({id, email},process.env.SECRET_PASS, {expiresIn: "24 hour"})
             let refreshToken = jwt.sign({id, email},process.env.REFRESH_PASS,{expiresIn: "7 days"})
             return res.send({token, refreshToken});
-        }
-        else{
-            let user = await userModel.findOne({email});
-            if(user){
-                return res.status(401).send("Invalid credentials");
-            }else{
-                return res.status(401).send("Email Id does't exist!");
-            }
         }
     }catch(e){
         res.status(500).send(e.message);

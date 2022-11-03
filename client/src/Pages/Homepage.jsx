@@ -5,6 +5,7 @@ import { Grid } from "@chakra-ui/react"
 import { BlogsFetch } from "../Store/blogs/blogs.action";
 import BlogDiv from "../Components/BlogDiv";
 import Navbar from "../Components/Navbar";
+import Intro from "../Components/Intro";
 
 export default function Homepage() {
 
@@ -19,15 +20,16 @@ export default function Homepage() {
         getData()
     },[])
 
-    return (<>
+    return (<Grid>
         <Navbar />
-        <Grid templateColumns="1fr 1fr" gap="10"  w="80%" m="auto" id="blogs-div">
+        <Intro />
+        <Grid templateColumns="repeat(2,1fr)" gap="10"  w="80%" m="auto" id="blogs-div" pt={10}>
             {
                 data?.map((b,index)=> (
                     <BlogDiv key={index} blogDetails={b} />
                 ))
             }
         </Grid>
-        </>
+        </Grid>
     )
 }
