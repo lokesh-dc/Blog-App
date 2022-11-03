@@ -1,8 +1,18 @@
 .sidebar{
-    /* justify-content: center; */
-    gap: 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100px;
 }
-.sidebar img{
-    width: 25px;
-    height: 25px;
+
+.sidebar >div svg{
+    width: 30px;
+    height: 30px;
+}
+
+.sidebar> div {
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
 }

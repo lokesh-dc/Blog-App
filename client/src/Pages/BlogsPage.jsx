@@ -4,6 +4,8 @@ import { Grid } from "@chakra-ui/react"
 
 import { BlogsFetch } from "../Store/blogs/blogs.action";
 import BlogDiv from "../Components/BlogDiv";
+import Navbar from "../Components/Navbar";
+ 
 
 export default function BlogsPage() {
 
@@ -20,6 +22,8 @@ export default function BlogsPage() {
 
 
     return (
+        <>
+        <Navbar />
         <Grid templateColumns="repeat(3,1fr)">
             {
                 data?.map((b,index)=> (
@@ -27,5 +31,6 @@ export default function BlogsPage() {
                 ))
             }
         </Grid>
+        </>
     )
 }

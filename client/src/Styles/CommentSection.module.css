@@ -1,4 +1,27 @@
 
-.comment_div{
-    
+.comment_div {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 250px;
+    height: fit-content;
+}
+
+.comment_div>p:first-child{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.comment_div > div{
+    border-top: 2px solid rgba(128, 128, 128, 0.295);
+    padding: 30px 0 ;
+}
+
+.comment_div>div *{
+    border-radius: 0;
+}
+
+.comment_div>div textarea{
+        padding: 10px;
+        border: 1px solid grey;
 }

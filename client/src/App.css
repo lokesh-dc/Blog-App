@@ -1,10 +1,16 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;500;600;700&display=swap');
+/* Regular font */
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+/* Logo font */
 @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+/* Heading Font */
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
 
 .App {
   text-align: center;
-  font-family: 'Noto Sans Mono', monospace;
+  font-family: 'PT Sans', sans-serif;
 }
 
 #logo{
@@ -13,6 +19,16 @@
   font-weight: bold;
   font-size: 1.5rem;
 }
+
+.heading{
+  /* font-family: 'Caveat', cursive; */
+  font-size: 4rem;
+  /* margin:100px 0; */
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* fontSize="4xl" fontWeight="bold" mt={10} mb={5} */
 
 #Social-buttons{
   justify-content: space-evenly;

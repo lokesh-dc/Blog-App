@@ -1,13 +1,5 @@
 .blog{
-    border: 1px solid red;
-}
-.blog > div{
-    border-right: 1px solid ;
-    height: 100vh;
-}
-
-.blog > div:nth-child(3) {
-    border-right: none;
-    height: fit-content;
-    text-align: left;
+    margin-left: 100px;
+    margin-right: 300px;
+    border: 1px solid;
 }

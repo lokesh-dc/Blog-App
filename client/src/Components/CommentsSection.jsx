@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
-import {Box, Button, Grid, Input, Text} from "@chakra-ui/react"
-
+import { Grid, Text} from "@chakra-ui/react"
 import io from "socket.io-client";
-// import CommentInput from "./CommentInput";
+
 import CommentsDiv from "./CommentsDiv";
 import style from "../Styles/CommentSection.module.css"
+import CommentInput from "./CommentInput";
 
 export const socket = io.connect('http://localhost:8080');
 
 
-export default function CommentSection({blogid,comments, show}) {
+export default function CommentSection({blogid,comments, show, length}) {
 
-
-    const [state, setState] = useState([]);
+    const [state, setState] = useState(comments);
 
     const [message, setMessage ] = useState("");
 
@@ -23,8 +22,6 @@ export default function CommentSection({blogid,comments, show}) {
     useState(()=>{
         setState(comments);
     },[])   
-
-    console.log(state)
 
     function handleSend(e){
         e.preventDefault();
@@ -47,18 +44,16 @@ export default function CommentSection({blogid,comments, show}) {
         {
             socket ?
             (
-                <Box m={30} display={show ? "grid" : "none"} className={style.comment_div} >
-                    <Text fontSize="xl">Resopnses</Text>
-                    <Grid templateColumns="3fr 1fr">
-                        <Input placeholder="What are your thoughts?" onChange={handleInput}></Input>
-                        <Button onClick={handleSend} colorScheme="transparent" className="primary-button">Send</Button>
-                    </Grid>
+                <Grid m={30} display={show ? "grid" : "none"} className={style.comment_div} >
+                    <p>Responses({length})</p>
+                    <CommentInput handleInput={handleInput} message={message} handleSend={handleSend}/>
                     {
                         state?.map((c, index)=>(
                             <CommentsDiv key={index} socket={socket} comment={c} />
                         ))
                     }
-                </Box>
+
+                </Grid>
             ) :
             <Text> Not Connected </Text>
         }
