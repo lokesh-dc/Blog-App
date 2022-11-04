@@ -10,7 +10,7 @@ import style from "../Styles/Blog.module.css"
 
 export default function BlogsPage() {
 
-    const { data } = useSelector((store)=> store.blogs);
+    const { data } = useSelector((store)=> store.bookmarks);
     const dispatch = useDispatch()    
 
     function getData() {

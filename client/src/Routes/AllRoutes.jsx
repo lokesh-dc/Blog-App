@@ -4,6 +4,7 @@ import {Routes, Route} from "react-router-dom";
 import VerifyEmail from "../Components/VerifyEmail";
 import Blog from "../Pages/Blog";
 import BlogsPage from "../Pages/BlogsPage";
+import Bookmarks from "../Pages/Bookmarks";
 import Homepage from "../Pages/Homepage";
 import Login from "../Pages/Login";
 import Signup from "../Pages/Signup";
@@ -19,6 +20,8 @@ export const AllRoutes = ()=> {
         <Route path="/login" element={<Login />}/>
         <Route path="/signup" element={< Signup/>}/>
         <Route path="/verify" element={<VerifyEmail />} />
+        <Route path="/saved" element={<Bookmarks />} />
+
     </Routes>
     )
 }

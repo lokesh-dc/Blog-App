@@ -52,6 +52,16 @@ app.get("/refreshtoken", async(req,res)=>{
     }
 })
 
+app.get("/details", async(req,res)=>{
+    let token = req.headers.token;
+    try{
+        let data = jwt.verify(token, process.env.SECRET_PASS);
+        let { id, email } = data;
+        res.send({id,email});
+    }catch(e){
+        res.status(401).send("Token required");
+    }
+})
 
 app.post("/signup", async (req, res)=>{
     let {userName, email, password} = req.body;

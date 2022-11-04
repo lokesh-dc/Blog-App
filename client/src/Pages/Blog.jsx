@@ -13,7 +13,6 @@ import SideBlog from "../Components/SideBlogs";
 import { verifyToken } from "../Utils";
 import NotLogged from "../Components/NotLogged";
 import { useDispatch } from "react-redux";
-import { bookmarksFetch } from "../Store/bookmarks/bookmark.acion";
 
 
 export default function Blog() {
@@ -52,8 +51,6 @@ export default function Blog() {
         verifyToken(token,refresh).then((res)=>{
             if(res.verified){
                 setIsLogged(true);
-                let token = localStorage.getItem("x_set") || false;
-                dispatch(bookmarksFetch({token}))
             }
         })
     },[dispatch])

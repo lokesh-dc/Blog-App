@@ -12,7 +12,7 @@ app.get("/", async (req, res)=>{
         try{
             let user = jwt.verify(token, process.env.SECRET_PASS);
             let id = user.id;
-            let saved = await bookmarks.find().populate({path : "blog", populate : { path : "user" , select: "-password"}}).populate("user", {password: 0});
+            let saved = await bookmarks.find({user: id}).populate({path : "blog", populate : { path : "user" , select: "-password"}}).populate("user", {password: 0});
             res.send(saved)
         }catch(e){
             return res.status(401).send("Token invalid")

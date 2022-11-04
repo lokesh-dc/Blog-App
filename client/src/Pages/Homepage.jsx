@@ -20,7 +20,8 @@ export default function Homepage() {
         getData()
     },[])
 
-    return (<Grid>
+    return (
+    <Grid>
         <Navbar />
         <Intro />
         <Grid templateColumns="repeat(2,1fr)" gap="10"  w="80%" m="auto" id="blogs-div" pt={10}>
@@ -30,6 +31,6 @@ export default function Homepage() {
                 ))
             }
         </Grid>
-        </Grid>
+    </Grid>
     )
 }

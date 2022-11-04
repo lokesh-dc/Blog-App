@@ -13,8 +13,8 @@ export default function Sidebar() {
                 </NavLink>
             <Flex flexDirection="column">
                 <NavLink to="/blogs" title="Home" className={({ isActive }) => (isActive ? style.active : style.inactive)}><TfiHome /></NavLink>
-                <NavLink title="Notifications" to="/notifications" className={({ isActive }) => (isActive ? style.active : style.inactive)}> <BsBookmarks /> </NavLink>
-                <NavLink title="Bookmarks" to="/saved" className={({ isActive }) => (isActive ? style.active : style.inactive)}> <BsBell /> </NavLink>
+                <NavLink title="Notifications" to="/saved" className={({ isActive }) => (isActive ? style.active : style.inactive)}> <BsBookmarks /> </NavLink>
+                <NavLink title="Bookmarks" to="/notifications" className={({ isActive }) => (isActive ? style.active : style.inactive)}> <BsBell /> </NavLink>
                 <NavLink title="Bookmarks" to="/stories" className={({ isActive }) => (isActive ? style.active : style.inactive)}><BsFileRichtext /></NavLink>
                 <Divider />
                 <NavLink title="Bookmarks" to="/write" className={({ isActive }) => (isActive ? style.active : style.inactive)}><RiEditBoxLine /></NavLink>
