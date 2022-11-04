@@ -25,18 +25,19 @@ app.post("/", async (req, res) => {
     let roles = access.roles;
     try{
         let decoded = jwt.verify(token, process.env.SECRET_PASS);
-        let user = await userModel.findOne({_id:decoded.id, email: decoded.email},{password:0});
+        let user = await userModel.findOne({_id:decoded.id, email: decoded.email});
         let role = user.role;
-
         var createdOn = getDate();;
         for(let k of roles){
             let r = k.role;
             let a = k.access;
             if(role ==  r && a.includes(oper)){
+                console.log("done")
                 let blog = await blogsModel.create({title, description, short_desc, src, createdOn, user: user.id });
                 return res.send(blog);
             }
         }
+        return res.status(401).send({message: "Missing Permissions", writer: false})
     }catch(e){
         res.status(401).send("Operation not allowed");
     }

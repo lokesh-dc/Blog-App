@@ -10,7 +10,7 @@ export default function BlogDiv({blogDetails}) {
     return (
         <Link to={`/blogs/${blogDetails._id}`}>
             <Box textAlign="left" border="1px solid rgba(0,0,0,0.1)" p="20px">
-                <Img className="blog-img" src={blogDetails.src}  width="100%" boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px" mb="10px" />
+                <Img className="blog-img" src={blogDetails.src} width="100%" boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px" mb="10px" />
                 <Text fontSize="2xl" fontWeight="bold">{blogDetails?.title}</Text>
                 <Text fontSize="sm" fontWeight="400">{blogDetails?.short_desc?.substring(0, 80)}..</Text>
 

@@ -4,8 +4,9 @@
     left: 0;
     width: 100px;
     height: 100vh;
+    background-color: rgba(211, 211, 211, 0.884);
+    /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
 }
-
 .sidebar >div svg{
     width: 30px;
     height: 30px;
@@ -17,3 +18,16 @@
     align-items: center;
     height: 90vh;
 }
+
+.active{
+    border: 1px solid rgba(32, 32, 32, 0.61);
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+
+}
+
+/* .inactive{
+    color: rgba(0, 0, 0, 0.245);
+} */

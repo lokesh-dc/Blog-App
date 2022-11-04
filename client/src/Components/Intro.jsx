@@ -8,7 +8,7 @@ export default function Intro() {
             <Text fontSize="2rem" color="white" className="quote"><q>Write it. Shoot it. Publish it. Crochet it.<br /> Sauté it. Whatever. Make.</q> <br/> — Joss Whedon</Text>
             <Flex justifyContent="center">
             <NavLink to="/blogs">
-                <Button w="fit-content" borderRadius={0} padding="10px 20px" >Start Writting</Button>
+                <Button w="fit-content" borderRadius={0} padding="10px 20px" zIndex={0} >Start Writting</Button>
             </NavLink>
             </Flex>
                 <Text color="white" letterSpacing="2px">Scroll down</Text>

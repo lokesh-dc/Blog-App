@@ -21,6 +21,38 @@ const transporter = nodemailer.createTransport({
         rejectUnauthorized : false
     }
 })
+
+app.get("/token", async(req,res)=>{
+    let token = req.headers.token;
+    if(token){
+        try{
+            jwt.verify(token, process.env.SECRET_PASS);
+            res.send({verified : true});
+        }catch(e){
+            res.send({message: "Token Invalid", verified : false});
+        }
+    }else{
+        res.status(401).send("Token is required.");
+    }
+})
+
+app.get("/refreshtoken", async(req,res)=>{
+    let refreshToken = req.headers.refresh;
+    if(refreshToken){
+        try{
+            let data = jwt.verify(refreshToken, process.env.REFRESH_PASS);
+            let { id, email } = data;
+            let token = jwt.sign({id, email},process.env.SECRET_PASS, {expiresIn: "24 hour"})
+            res.send({verified : true, token: token});
+        }catch(e){
+            res.status(401).send({message: "Token Invalid", verified : false});
+        }
+    }else{
+        res.status(401).send("Token is required.");
+    }
+})
+
+
 app.post("/signup", async (req, res)=>{
     let {userName, email, password} = req.body;
     try{

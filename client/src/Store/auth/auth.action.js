@@ -17,6 +17,8 @@ export const login = ({email, password}) => async (dispatch) =>{
     dispatch({type:AUTH_LOGIN_LOADING});
     try{
         let response = await axios.post(`${baseLink}/users/login`,{email, password})
+        localStorage.setItem("x_set", response.data.token);
+        localStorage.setItem("y_set", response.data.refreshToken);
         dispatch({type: AUTH_LOGIN_SUCCESS, payload: response.data});
         return response.data;
     }catch(e){
@@ -40,6 +42,8 @@ export const verifyUser = ({email, otp}) => async (dispatch) => {
     dispatch({ type: AUTH_VERIFY_LOADING });
     try{
         let response = await axios.post(`${baseLink}/users/signup/verify`, {email,otp});
+        localStorage.setItem("x_set", response.data.token);
+        localStorage.setItem("y_set", response.data.refreshToken);
         dispatch({type: AUTH_VERIFY_SUCCESS, payload: response.data});
     }catch(e){
         dispatch({type: AUTH_VERIFY_ERROR, payload: e.response.data})

@@ -25,7 +25,6 @@ export default function Login() {
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     
     // function to capture changes in form input
     function handleChange(e) {
@@ -57,19 +56,19 @@ export default function Login() {
         }
     },[data.message, navigate])
 
+    let token = data.token || localStorage.getItem("x_set") || false;
+
     useEffect(()=>{
-        if(data.token){
+        if(token){
             navigate("/blogs");
         }
-    },[data.token, navigate])
+    },[token, navigate])
 
     useEffect(()=>{
         if(error!==""){
             setFormError(error);
         }
     },[error])
-
-    console.log(data)
 
     return (
         <>
