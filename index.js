@@ -12,7 +12,7 @@ require("dotenv").config({path: __dirname+"/config.env"})
 const usersRouter = require("./features/users/users.router");
 const blogsRouter = require("./features/blogs/blogs.router");
 const blogsModel = require("./features/blogs/blog.schema");
-
+const savedRouter = require("./features/readLater/readLater.model");
 
 const app = express()
 app.use(cors())
@@ -52,6 +52,7 @@ app.use(express.json())
 
 app.use("/users", usersRouter)
 app.use("/blogs", blogsRouter);
+app.use("/saved", savedRouter)
 app.get('/', (req, res) => res.send('hello'))
 
 

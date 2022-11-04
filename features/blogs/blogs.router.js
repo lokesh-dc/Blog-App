@@ -43,13 +43,6 @@ app.post("/", async (req, res) => {
     }
 })
 
-app.post("/like/:id", async(req,res)=>{
-    let id = req.params.id;
-    let blog = await blogsModel.findById({_id : id});
-    let likeBlog = await blogsModel.findByIdAndUpdate({_id : id},{likes : blog.likes + 1})
-    res.send(likeBlog);
-})
-
 app.get("/:id", async(req,res)=>{
     let id = req.params.id ;
     let blog = await blogsModel.findById({_id : id}).populate("user", {"password" : 0});
