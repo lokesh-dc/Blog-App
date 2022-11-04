@@ -1,0 +1,28 @@
+.notLogged{
+    margin: 20px 0;
+    padding: 10px 50px;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: white;
+    border: 1px solid ;
+    position: sticky;
+    top: 0;
+    justify-content: space-between;
+
+}
+
+.notLogged>p:first-child{
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.notLogged>button{
+    width: fit-content;
+    display: block;
+    margin: auto;
+    letter-spacing: 1px;
+}
+
+.notLogged>p:nth-child(3) > a{
+    color: rgb(49, 49, 218);
+}
