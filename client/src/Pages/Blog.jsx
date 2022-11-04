@@ -12,11 +12,16 @@ import WriterDiv from "../Components/WriterDiv";
 import SideBlog from "../Components/SideBlogs";
 import { verifyToken } from "../Utils";
 import NotLogged from "../Components/NotLogged";
+import { useDispatch } from "react-redux";
+import { bookmarksFetch } from "../Store/bookmarks/bookmark.acion";
 
 
 export default function Blog() {
 
     const params = useParams();
+    const dispatch = useDispatch();
+
+
     const id = params.id;
     const [blog, setBlog] = useState({});
 
@@ -47,9 +52,12 @@ export default function Blog() {
         verifyToken(token,refresh).then((res)=>{
             if(res.verified){
                 setIsLogged(true);
+                let token = localStorage.getItem("x_set") || false;
+                dispatch(bookmarksFetch({token}))
             }
         })
-    },[])
+    },[dispatch])
+
 
     useEffect(()=>{
         socket.on('connect', ()=> console.log("connected"))

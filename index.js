@@ -12,7 +12,7 @@ require("dotenv").config({path: __dirname+"/config.env"})
 const usersRouter = require("./features/users/users.router");
 const blogsRouter = require("./features/blogs/blogs.router");
 const blogsModel = require("./features/blogs/blog.schema");
-const savedRouter = require("./features/readLater/readLater.model");
+const savedRouter = require("./features/readLater/readLater.router");
 
 const app = express()
 app.use(cors())
