@@ -1,3 +1,31 @@
 .writeStory{
     padding: 50px;
 }
+
+.writeStory > form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 1rem;
+}
+
+.writeStory input{
+    border: none;
+    height: 60px;
+}
+
+.writeStory input:focus,
+.writeStory textarea:focus {
+    border: none
+}
+.writeStory textarea,
+.writeStory input{
+    padding: 20px;
+}
+.writeStory button:last-of-type {
+    color: white;
+    background-color: green;
+    width: fit-content;
+    border-radius: 20px;
+    padding: 5px 30px;
+}
