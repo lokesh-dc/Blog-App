@@ -8,6 +8,7 @@ import Bookmarks from "../Pages/Bookmarks";
 import Homepage from "../Pages/Homepage";
 import Login from "../Pages/Login";
 import Signup from "../Pages/Signup";
+import Stories from "../Pages/Stories";
 import WriteStory from "../Pages/WriteStory";
 import PrivateRoutes from "./PrivateRoutes";
 
@@ -22,6 +23,7 @@ export const AllRoutes = ()=> {
         <Route path="/signup" element={< Signup/>}/>
         <Route path="/verify" element={<VerifyEmail />} />
         <Route path="/saved" element={ <PrivateRoutes> <Bookmarks /> </PrivateRoutes>} />
+        <Route path="/stories" element={ <PrivateRoutes> <Stories /> </PrivateRoutes>} />
         <Route path="/write_story" element={ <PrivateRoutes> <WriteStory /> </PrivateRoutes>} />
     </Routes>
     )

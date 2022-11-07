@@ -33,7 +33,6 @@ app.post("/", async (req, res) => {
             let r = k.role;
             let a = k.access;
             if(role ==  r && a.includes(oper)){
-                console.log("done")
                 let blog = await blogsModel.create({title, description, short_desc, src, createdOn, user: user.id });
                 return res.send(blog);
             }
@@ -54,6 +53,20 @@ app.get("/:id", async(req,res)=>{
 app.get("/", async (req, res) => {
     let blogs = await blogsModel.find().populate("user", {"password" : 0});
     res.send(blogs);
+})
+
+
+app.get("/stories", async (req, res)=>{
+    let token = req.headers.token;
+    let {id, email} = jwt.verify(token, process.env.SECRET_PASS);
+    if(token){
+        try{
+            let blogs = await blogsModel.find({user: id}).populate("user", {"password" : 0});
+            res.send(blogs);
+        }catch(e){
+            return res.status(401).send("Could't perform task");
+        }
+    }
 })
 
 module.exports = app;

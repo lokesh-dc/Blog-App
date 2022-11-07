@@ -33,7 +33,16 @@ export const BlogsFetch = () => async (dispatch) => {
     }
 }
 
-
+export const UserBlogsFetch = (token) => async (dispatch) => {
+    dispatch({type : BLOG_FETCH_LOADING});
+    try{
+        let response = await axios.get(`${baseLink}/blogs/stories`, {headers: {token}});
+        dispatch({type : BLOG_FETCH_SUCCESS, payload : response.data});
+        return response.data;
+    }catch(e){
+        dispatch({ type : BLOG_FETCH_ERROR , payload : e.response.data});
+    }
+}
 
 export const BlogLike = (id) => async (dispatch) => {
     let response = await axios.post(`${baseLink}/blogs/like/${id}`)

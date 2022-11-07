@@ -25,6 +25,10 @@ app.get("/", async (req, res)=>{
 app.post("/", async (req,res)=>{
     let token = req.headers.token;
     let {blog} = req.body;
+    let found = await bookmarks.find({blog: blog});
+    if(found){
+        return res.send("added");
+    }
     if(token){
         try{
             let user = jwt.verify(token, process.env.SECRET_PASS);

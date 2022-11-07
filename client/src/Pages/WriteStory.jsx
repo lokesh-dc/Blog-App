@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Grid, Img, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../Components/Sidebar";
 import { userDetails } from "../Store/auth/auth.action";
