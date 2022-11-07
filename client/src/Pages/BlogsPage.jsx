@@ -10,16 +10,15 @@ import style from "../Styles/Blog.module.css"
 
 export default function BlogsPage() {
 
-    const { data } = useSelector((store)=> store.bookmarks);
+    const { data } = useSelector((store)=> store.blogs);
     const dispatch = useDispatch()    
 
-    function getData() {
-        dispatch(BlogsFetch());
-    }
 
     useEffect(()=>{
-        getData()
-    },[])
+        dispatch(BlogsFetch());
+    },[dispatch])
+
+    
 
     return (
         <Grid className={style.blog} templateColumns= "100px 5fr">

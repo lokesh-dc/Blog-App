@@ -20,7 +20,7 @@ export const AllRoutes = ()=> {
         <Route path="/login" element={<Login />}/>
         <Route path="/signup" element={< Signup/>}/>
         <Route path="/verify" element={<VerifyEmail />} />
-        <Route path="/saved" element={<Bookmarks />} />
+        <Route path="/saved" element={ <PrivateRoutes> <Bookmarks /> </PrivateRoutes>} />
 
     </Routes>
     )

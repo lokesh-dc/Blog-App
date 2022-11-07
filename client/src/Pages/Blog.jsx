@@ -1,18 +1,18 @@
 import { Box, Grid, Img, Text } from "@chakra-ui/react";
 import { useState , useEffect} from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import {  getBlog } from "../Store/blogs/blogs.action";
 
 import style from "../Styles/Blog.module.css"
+import { verifyToken } from "../Utils";
 
 import CommentSection, { socket } from "../Components/CommentsSection"
 import Sidebar from "../Components/Sidebar";
 import Interact from "../Components/Interact";
 import WriterDiv from "../Components/WriterDiv";
 import SideBlog from "../Components/SideBlogs";
-import { verifyToken } from "../Utils";
 import NotLogged from "../Components/NotLogged";
-import { useDispatch } from "react-redux";
 
 
 export default function Blog() {
@@ -84,7 +84,7 @@ export default function Blog() {
                 <WriterDiv email={blog?.user?.email} createdOn={blog?.createdOn}/>
                 <Text className="heading">{blog?.title}</Text>
                 <Text fontSize="1.5rem">{blog?.short_desc}</Text>
-                <Img src={blog?.src} alt="blog-hero-img" w="100%" margin="auto" my={30} />
+                <Img src={blog?.src} alt="blog-hero-img" w="90vh" margin="auto" my={30} />
                 <Box id="content" textAlign="justify">
                     {/* {blog?.content} */}
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum at varius vel pharetra vel turpis nunc eget lorem. Venenatis urna cursus eget nunc scelerisque viverra mauris. Elementum nisi quis eleifend quam. Mattis aliquam faucibus purus in massa. Semper quis lectus nulla at volutpat diam ut. Ornare quam viverra orci sagittis eu. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et ligula. Et magnis dis parturient montes nascetur ridiculus mus mauris. Odio euismod lacinia at quis risus. Gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim. Faucibus nisl tincidunt eget nullam non nisi. Eget mi proin sed libero enim sed faucibus turpis in. In hac habitasse platea dictumst vestibulum rhoncus est. Sed risus ultricies tristique nulla aliquet enim tortor.

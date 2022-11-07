@@ -57,7 +57,12 @@ app.get("/details", async(req,res)=>{
     try{
         let data = jwt.verify(token, process.env.SECRET_PASS);
         let { id, email } = data;
-        res.send({id,email});
+        try{
+            let user = await userModel.findOne({_id: id, email},{password: 0, __v :0});
+            res.send(user);
+        }catch(e){
+            return res.status(404).send("Not found");
+        }
     }catch(e){
         res.status(401).send("Token required");
     }

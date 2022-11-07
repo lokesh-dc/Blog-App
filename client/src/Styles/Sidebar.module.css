@@ -5,18 +5,28 @@
     width: 100px;
     height: 100vh;
     background-color: rgba(211, 211, 211, 0.884);
-    /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
 }
-.sidebar >div svg{
+
+.sidebar>div:nth-child(2){
+    height: 75vh;
+}
+.sidebar>div:nth-child(2) svg{
     width: 30px;
     height: 30px;
 }
 
-.sidebar> div {
+.sidebar>div:nth-child(3) img{
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: auto;
+}
+
+.sidebar > div {
     gap: 30px;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    border: 1x solid red;
 }
 
 .active{
@@ -28,6 +38,6 @@
 
 }
 
-/* .inactive{
-    color: rgba(0, 0, 0, 0.245);
-} */
+.inactive{
+    padding: 10px;
+}

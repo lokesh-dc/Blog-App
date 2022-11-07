@@ -9,7 +9,8 @@ import {
     AUTH_SIGNUP_SUCCESS,
     AUTH_VERIFY_ERROR,
     AUTH_VERIFY_LOADING,
-    AUTH_VERIFY_SUCCESS
+    AUTH_VERIFY_SUCCESS,
+    AUTH_LOGOUT
 } from "./auth.type"    
 
 
@@ -48,4 +49,16 @@ export const verifyUser = ({email, otp}) => async (dispatch) => {
     }catch(e){
         dispatch({type: AUTH_VERIFY_ERROR, payload: e.response.data})
     }
+}
+
+export const userDetails = async (token) => {
+    let response = axios.get(`${baseLink}/users/details`,{headers : {token}});
+    return (await response).data;
+}
+
+
+export const logout = () => async(dispatch) => {
+    localStorage.removeItem("x_set");
+    localStorage.removeItem("y_set");
+    dispatch({type : AUTH_LOGOUT});
 }
