@@ -60,6 +60,12 @@
   /* padding: 10px 30px; */
 }
 
+.secondary_button{
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: transparent;
+  color: black;
+}
 .blog-img{
   width: 100%;
   height: 300px;

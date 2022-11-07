@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Flex, Grid, Img, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import style from "../Styles/Sidebar.module.css"
 
 import { TfiHome } from "react-icons/tfi"
@@ -9,11 +9,10 @@ import { useEffect } from "react";
 import { verifyToken } from "../Utils";
 import { useState } from "react";
 import { logout, userDetails } from "../Store/auth/auth.action";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 export default function Sidebar() {
 
 
-    const {data} = useSelector((Store)=> Store.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -52,33 +51,30 @@ export default function Sidebar() {
             </NavLink>
             <Flex flexDirection="column">
                 <NavLink to="/blogs" title="Home" className={({ isActive }) => (isActive ? style.active : style.inactive)}><TfiHome /></NavLink>
-                <NavLink title="Notifications" to="/saved" className={({ isActive }) => (isActive ? style.active : style.inactive)}> <BsBookmarks /> </NavLink>
-                <NavLink title="Bookmarks" to="/" className={({ isActive }) => (isActive ? style.active : style.inactive)}> <BsBell /> </NavLink>
-                <NavLink title="Bookmarks" to="/" className={({ isActive }) => (isActive ? style.active : style.inactive)}><BsFileRichtext /></NavLink>
+                <NavLink title="Bookmarks" to="/saved" className={({ isActive }) => (isActive ? style.active : style.inactive)}> <BsBookmarks /> </NavLink>
+                <NavLink title="Notifications" to="/notifications" className={({ isActive }) => (isActive ? style.active : style.inactive)}> <BsBell /> </NavLink>
+                <NavLink title="Stories" to="/stories" className={({ isActive }) => (isActive ? style.active : style.inactive)}><BsFileRichtext /></NavLink>
                 <Divider />
-                <NavLink title="Bookmarks" to="/" className={({ isActive }) => (isActive ? style.active : style.inactive)}><RiEditBoxLine /></NavLink>
+                <NavLink title="Write Story" to="/write_story" className={({ isActive }) => (isActive ? style.active : style.inactive)}><RiEditBoxLine /></NavLink>
             </Flex>
             {
                 isLogged &&
                 <Box>
-                    <Menu>
+                    <Menu >
                         <MenuButton>
-                        <Img src={require("../Resources/icons/avatar.png")} />
+                            <Img src={require("../Resources/icons/avatar.png")} />
                         </MenuButton>
-                        <MenuList>
+                        <MenuList className={style.user}>
                             <MenuItem>Become a Writer</MenuItem>
                             <Divider />
                             <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
                             <MenuItem>Settings</MenuItem>
                             <Divider />
-                            <Box>
-                                <Text>{user?.email}</Text>
-                                <Button>View Profile</Button>
-                            </Box>
+                            <MenuItem><Text>{user?.email}</Text></MenuItem>
+                            <MenuItem><Button className="secondary_button" display="block" margin="auto" colorScheme="trasnsparent" color="black">View Profile</Button></MenuItem>
                         </MenuList>
-                        </Menu>
+                    </Menu>
                 </Box>
-
             }
            
         </Grid>

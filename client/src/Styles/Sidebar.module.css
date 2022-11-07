@@ -11,13 +11,13 @@
     height: 75vh;
 }
 .sidebar>div:nth-child(2) svg{
-    width: 30px;
-    height: 30px;
+    width:  20px;
+    height: 20px;
 }
 
 .sidebar>div:nth-child(3) img{
-    width: 50px;
-    height: 50px;
+    width:  35px;
+    height: 35px;
     display: block;
     margin: auto;
 }
@@ -32,7 +32,7 @@
 .active{
     border: 1px solid rgba(32, 32, 32, 0.61);
     padding: 10px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.568);
     color: white;
     border-radius: 50%;
 
@@ -40,4 +40,12 @@
 
 .inactive{
     padding: 10px;
+}
+
+.sidebar>div:nth-child(3) > div > div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    padding-left: 0;
 }
