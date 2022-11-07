@@ -10,22 +10,41 @@
 }
 
 .writeStory input{
-    border: none;
     height: 60px;
+    letter-spacing: 1px;
 }
 
+.writeStory>form >div>input{
+    color: red;
+    height: fit-content;
+}
 .writeStory input:focus,
 .writeStory textarea:focus {
     border: none
 }
+.writeStory textarea{
+    resize: none;
+}
 .writeStory textarea,
 .writeStory input{
     padding: 20px;
+    font-size: 1rem;
+    border: 1px solid rgba(196, 196, 196, 0.37);
+    border-radius: 5px;
 }
-.writeStory button:last-of-type {
+.writeStory > form> div:last-of-type  button:last-of-type {
     color: white;
     background-color: green;
     width: fit-content;
     border-radius: 20px;
     padding: 5px 30px;
+}
+
+.error{
+    background-color: rgba(255, 192, 203, 0.671);
+    border: 1px solid rgb(253, 39, 75);
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    color: rgb(253, 39, 75);
 }

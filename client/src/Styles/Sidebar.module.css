@@ -43,9 +43,11 @@
 }
 
 .sidebar>div:nth-child(3) > div > div{
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 20px;
-    padding-left: 0;
+    padding-left: 0; */
+    z-index: 1000000000000000000000000000;
+
 }

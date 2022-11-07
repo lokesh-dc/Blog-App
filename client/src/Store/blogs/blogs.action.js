@@ -1,8 +1,7 @@
 import axios from "axios";
 import { baseLink } from "../source"
 import {
-    // BLOG_COMMENT,
-    // BLOG_CREATE,
+    BLOG_CREATE,
     // BLOG_DELETE,
     BLOG_FETCH_ERROR,
     BLOG_FETCH_LOADING,
@@ -10,6 +9,18 @@ import {
     // BLOG_UPDATE,
     BLOG_LIKE
 } from "./blogs.type"
+
+export const addBlog = ({blog, token})=> async (dispatch) => {
+    dispatch({type : BLOG_CREATE});
+    try{
+        console.log("blog",blog)
+        let response = await axios.post(`${baseLink}/blogs`, blog , {headers: {token}})
+        dispatch({type: BLOG_CREATE});
+        return response.data;
+    }catch(e){
+        console.log(e.message);
+    }
+}
 
 export const BlogsFetch = () => async (dispatch) => {
     dispatch({type : BLOG_FETCH_LOADING});
@@ -21,6 +32,8 @@ export const BlogsFetch = () => async (dispatch) => {
         dispatch({ type : BLOG_FETCH_ERROR , payload : e.response.data});
     }
 }
+
+
 
 export const BlogLike = (id) => async (dispatch) => {
     let response = await axios.post(`${baseLink}/blogs/like/${id}`)

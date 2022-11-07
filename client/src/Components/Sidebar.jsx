@@ -19,6 +19,7 @@ export default function Sidebar() {
     const [isLogged, setIsLogged] = useState(false);
 
     const [ user, setUser] = useState({});
+
     useEffect(()=>{
         let token = localStorage.getItem("x_set") || false;
         let refresh = localStorage.getItem("y_set") || false;
@@ -70,8 +71,10 @@ export default function Sidebar() {
                             <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
                             <MenuItem>Settings</MenuItem>
                             <Divider />
-                            <MenuItem><Text>{user?.email}</Text></MenuItem>
-                            <MenuItem><Button className="secondary_button" display="block" margin="auto" colorScheme="trasnsparent" color="black">View Profile</Button></MenuItem>
+                            <Grid gap="10px" alignItems="center" justifyContent="center" p="10px"> 
+                                <Text fontSize="1rem"> {user?.email}</Text>
+                                <Button className="secondary_button" colorScheme="transparent" color="black" width="fit-content">  View Profile</Button>
+                            </Grid>
                         </MenuList>
                     </Menu>
                 </Box>

@@ -20,7 +20,8 @@ function getDate(){
 }
 
 app.post("/", async (req, res) => {
-    let { title, description, short_desc, src, token} = req.body;
+    let { title, description, short_desc, src} = req.body;
+    let token = req.headers.token;
     oper = "C";
     let roles = access.roles;
     try{

@@ -7,6 +7,5 @@ export const BLOG_CREATE =  "blogs/create"
 export const BLOG_DELETE = "blogs/delete"
 export const BLOG_UPDATE = "blogs/update"
 
-export const BLOG_COMMENT = "blog/comment";
 export const BLOG_LIKE = "blog/like";
 
