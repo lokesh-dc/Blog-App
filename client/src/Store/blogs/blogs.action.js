@@ -36,7 +36,7 @@ export const BlogsFetch = () => async (dispatch) => {
 export const UserBlogsFetch = (token) => async (dispatch) => {
     dispatch({type : BLOG_FETCH_LOADING});
     try{
-        let response = await axios.get(`${baseLink}/blogs/stories`, {headers: {token}});
+        let response = await axios.get(`${baseLink}/stories`, {headers: {token}});
         dispatch({type : BLOG_FETCH_SUCCESS, payload : response.data});
         return response.data;
     }catch(e){

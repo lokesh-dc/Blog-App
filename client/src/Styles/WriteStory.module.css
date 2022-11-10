@@ -15,7 +15,6 @@
 }
 
 .writeStory>form >div>input{
-    color: red;
     height: fit-content;
 }
 .writeStory input:focus,

@@ -1,4 +1,6 @@
 const express = require("express");
+
+const { createClient } = require('redis');
 const nodemailer = require("nodemailer");
 
 const userModel = require("./user.schema");
@@ -8,6 +10,14 @@ require("dotenv").config({path: __dirname+"/config.env"})
 
 
 const app = express.Router();
+const client = createClient({
+    url: 'redis://default:I7KEs7iiWCdiE9iXvt62gzvmhv9p8zL7@redis-17428.c212.ap-south-1-1.ec2.cloud.redislabs.com:17428',
+    user: "default",
+    password: "I7KEs7iiWCdiE9iXvt62gzvmhv9p8zL7"
+  });
+
+client.connect();
+
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -142,6 +152,8 @@ app.post("/login", async(req, res)=>{
             let id = user._id;
             let token = jwt.sign({id, email},process.env.SECRET_PASS, {expiresIn: "24 hour"})
             let refreshToken = jwt.sign({id, email},process.env.REFRESH_PASS,{expiresIn: "7 days"})
+
+
             return res.send({token, refreshToken});
         }
     }catch(e){

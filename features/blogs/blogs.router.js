@@ -22,6 +22,9 @@ function getDate(){
 app.post("/", async (req, res) => {
     let { title, description, short_desc, src} = req.body;
     let token = req.headers.token;
+
+    console.log("hio")
+
     oper = "C";
     let roles = access.roles;
     try{
@@ -34,7 +37,7 @@ app.post("/", async (req, res) => {
             let a = k.access;
             if(role ==  r && a.includes(oper)){
                 let blog = await blogsModel.create({title, description, short_desc, src, createdOn, user: user.id });
-                return res.send(blog);
+                return res.send({message: true});
             }
         }
         return res.status(401).send({message: "Missing Permissions", writer: false})
@@ -55,18 +58,5 @@ app.get("/", async (req, res) => {
     res.send(blogs);
 })
 
-
-app.get("/stories", async (req, res)=>{
-    let token = req.headers.token;
-    let {id, email} = jwt.verify(token, process.env.SECRET_PASS);
-    if(token){
-        try{
-            let blogs = await blogsModel.find({user: id}).populate("user", {"password" : 0});
-            res.send(blogs);
-        }catch(e){
-            return res.status(401).send("Could't perform task");
-        }
-    }
-})
 
 module.exports = app;

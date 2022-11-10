@@ -61,7 +61,6 @@ export default function WriteStory() {
             if(res.verified){
                 let token = localStorage.getItem("x_set") || false;
                 dispatch(addBlog({blog: state, token}))        
-                navigate("/stories");
             }
         })
     }
@@ -101,12 +100,12 @@ export default function WriteStory() {
                 <form>
                     <input type="text" placeholder="title" name="title" autoFocus value={state.title} onChange={handleData} />
                     <input type="text" placeholder="Summary" name="short_desc" value={state.short_desc} onChange={handleData} />
+                    <textarea type="text" placeholder="Tell your Story..." name="description" rows="14" value={state.description} onChange={handleData} />
                     <Flex alignItems="center" gap="10px" >
                         <label>Upload Cover photo : </label>
                         <input type="file" onChange={imgFilehandler} name="src" />
                         <Button className="secondary_button" width="fit-content" onClick={saveImage} disabled={imgfile[0]=== undefined ? true : false}>Save</Button>
                     </Flex>
-                    <textarea type="text" placeholder="Tell your Story..." name="description" rows="14" value={state.description} onChange={handleData} />
                     {
                         formError && <Text className={style.error}>{formError}</Text>
                     }

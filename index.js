@@ -3,7 +3,7 @@ const http = require("http")
 const { connect } = require('http2');
 const socketIo = require('socket.io')
 const cors = require("cors");
-
+const jwt = require('jsonwebtoken');
 
 const dbConnect = require('./config/dbConnect');
 require("dotenv").config({path: __dirname+"/config.env"})
@@ -55,7 +55,20 @@ app.use("/blogs", blogsRouter);
 app.use("/saved", savedRouter)
 app.get('/', (req, res) => res.send('hello'))
 
-
+app.get("/stories", async (req, res)=>{
+    let token = req.headers.token;
+    if(token){
+        try{
+            let {id} = jwt.verify(token, process.env.SECRET_PASS);
+            let blogs = await blogsModel.find({user: id});
+            res.send(blogs);
+        }catch(e){
+            res.status(404).send("Not found");
+        }
+    }else{
+        res.status(401).send("Token required");
+    }
+})
 
 server.listen(process.env.PORT, async () => {
     await dbConnect();
