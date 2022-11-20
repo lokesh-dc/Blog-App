@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
 
 import { verifyUser } from "../Store/auth/auth.action"
+import Nav from "./UserNav";
 
 export default function VerifyEmail() {
 
@@ -44,6 +45,8 @@ export default function VerifyEmail() {
     console.log(data);
 
     return (
+        <>
+        <Nav />
         <Grid h="93vh" bgImage={require("../Resources/background.jpg")} bgSize="100%" >
             <Grid gap="30x" p="30px" width="600px" margin="auto" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" bgColor="white" justifyContent="center">
                 <Text fontSize="3xl" >Verify your Email ID </Text>
@@ -74,5 +77,6 @@ export default function VerifyEmail() {
                 </Flex>
             </Grid>
         </Grid>
+        </>
     )
 }
