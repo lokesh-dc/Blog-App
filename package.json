@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
-  },
+    "dev": "nodemon index.js",
+    "start" : "node index.js  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lokesh-dc/Blog-App.git"
