@@ -19,7 +19,7 @@ app.use(cors())
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: "https://idyllic-concha-85c2f8.netlify.app/"
+        origin: "https://idyllic-concha-85c2f8.netlify.app"
     }
 });
 
